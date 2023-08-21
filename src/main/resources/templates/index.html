@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bootstrap demo</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body class="container-fluid">
+	<p class="text-primary bg-warning-subtle text-center text-capitalize display-4">welcome to thymeleaf application</p>
+	<form>
+		<div class="mb-3">
+			<label for="exampleInputEmail1" class="form-label">Model Name</label>
+			<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="model" placeholder="enter model">
+		</div>
+		<div class="mb-3">
+			<label for="exampleInputPassword1" class="form-label">Make
+				Name</label> <input type="text" class="form-control" id="exampleInputPassword1" name="make" placeholder="enter make">
+		</div>
+		<button type="submit" class="btn btn-primary" formaction="/">All Cars</button>		
+		<button type="submit" class="btn btn-primary" formaction="model">By Model</button>
+		<button type="submit" class="btn btn-primary" formaction="make">By Make</button>
+	</form>
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th scope="col">Sl #</th>
+				<th scope="col">Model</th>
+				<th scope="col">Make</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="car:${key}">
+				<th scope="row" th:text="${car.id}"></th>
+				<td th:text="${car.model}"></td>
+				<td th:text="${car.make}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="text-primary bg-warning-subtle text-center text-capitalize display-4">enter car model and make to save here</p>
+	<form  onsubmit="return demo()" method="post" action="save">
+		<div class="mb-3">
+			<label for="formGroupExampleInput" class="form-label">Model</label>
+			<input type="text" class="form-control"  placeholder="enter model" id='model' name="model">
+		  </div>
+		  <div class="mb-3">
+			<label for="formGroupExampleInput2" class="form-label">Make</label>
+			<input type="text" class="form-control" placeholder="enter make" id='make' name="make">
+		  </div>
+		  <button type="submit" class="btn btn-primary ">Save Model and Make</button>
+	</form>	
+	<script>
+		function demo() {
+			let model = document.getElementById('model').value
+			let make = document.getElementById('make').value
+			if (!model == '' && !make == '') {
+				alert("Data Saved Successfully!")
+				return true
+			} else {
+				alert("Kindly Fill Data")
+				return false
+			}
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
